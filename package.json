@@ -1,0 +1,49 @@
+{
+  "name": "@thewhodidthis/turtle",
+  "version": "0.0.0",
+  "description": "Graphics do",
+  "main": "index",
+  "module": "index.es",
+  "homepage": "https://github.com/thewhodidthis/turtle#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thewhodidthis/turtle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thewhodidthis/turtle/issues"
+  },
+  "scripts": {
+    "pretest": "eslint test.js",
+    "test": "rollup -c node:x -f iife test.js | kpow",
+    "prestart": "eslint index.es",
+    "start": "rollup -e @thewhodidthis/arithmetics,poltocar -f cjs --no-interop index.es | buble > index.js",
+    "preexample": "eslint example/index.es",
+    "example": "cd example; rollup -c node:x -f iife index.es | buble | cpp -P | grep -v '^//' | uniq > index.js"
+  },
+  "eslintConfig": {
+    "extends": "@thewhodidthis"
+  },
+  "engines": {
+    "node": ">=4.2.4",
+    "npm": ">=3.5.3"
+  },
+  "dependencies": {
+    "@thewhodidthis/arithmetics": "github:thewhodidthis/arithmetics",
+    "poltocar": "github:thewhodidthis/poltocar"
+  },
+  "devDependencies": {
+    "@thewhodidthis/eslint-config": "latest",
+    "buble": "latest",
+    "cutaway": "latest",
+    "eslint": "latest",
+    "rollup": "latest",
+    "rollup-config-x": "latest",
+    "tapeless": "latest"
+  },
+  "keywords": [
+    "canvas",
+    "graphics"
+  ],
+  "author": "sChzs BkgNns <sotirios.bakagiannis@gmail.com> (https://www.thewhodidthis.com)",
+  "license": "Unlicense"
+}
