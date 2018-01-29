@@ -1,25 +1,25 @@
+import { rand } from '@thewhodidthis/arithmetics'
 import createTurtle from '../index.es'
 
 const canvas = document.querySelector('canvas')
 const target = canvas.getContext('2d')
 
 const turtle = createTurtle(target)
-
-const render = (total = 0) => {
-  if (total === 0) {
-    return false
+const stroll = (n) => {
+  if (n === 0) {
+    return
   }
 
-  turtle
-    .home()
-    .rt(6)
-    .pu()
-    .fd(50)
-    .pd()
-    .fd(70)
+  const a = rand(90, -90)
+  const d = rand(4, 12)
 
-  return render(total - 1)
+  turtle.lt(a).fd(d)
+
+  stroll(n - 1)
 }
 
-turtle.look('white')
-render(360 / 6)
+['#fff', '#f00', '#0ff', '#00f', '#f0f', '#ff0'].forEach((c) => {
+  turtle.home().look(c)
+
+  stroll(360)
+})
