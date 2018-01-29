@@ -4,102 +4,113 @@ import poltocar from 'poltocar'
 // # Turtle
 // Graphics do
 
-const createTurtle = (board, x = 0, y = x, angle = 0) => {
-  const valid = board instanceof CanvasRenderingContext2D
+const createTurtle = (turf, load = {}) => {
+  const pass = turf instanceof CanvasRenderingContext2D
 
-  if (!valid) {
+  if (!pass) {
     throw Error('Invalid rendering context')
   }
 
-  const { width: w, height: h } = board.canvas
+  const { width: w, height: h } = turf.canvas
 
-  const trail = []
-  const store = { angle, x, y, state: true }
-  const agent = {
+  const home = Object.assign({ x: w * 0.5, y: h * 0.5, angle: 0 }, load)
+  const data = Object.assign({ trace: 1 }, home)
+
+  const path = []
+
+  // This turtle goes by the name of Jack :))
+  const jack = {
     get venue() {
-      return { x: store.x, y: store.y }
+      return { x: data.x, y: data.y }
     },
     get angle() {
-      return deg(store.angle)
+      return deg(data.angle)
     },
     get score() {
-      return trail
+      return path
+    },
+    get state() {
+      return data
     }
   }
 
-  agent.look = (style = board.strokeStyle, width = board.lineWidth) => {
-    board.strokeStyle = style
-    board.lineWidth = width
+  jack.look = (style = turf.strokeStyle, width = turf.lineWidth) => {
+    turf.strokeStyle = style
+    turf.lineWidth = width
 
-    return agent
+    return jack
   }
 
-  agent.fill = (color) => {
-    if (color) {
-      board.fillStyle = color
+  jack.fill = (style) => {
+    if (style) {
+      turf.fillStyle = style
     }
 
-    if (trail.length) {
-      trail.forEach((p) => {
-        board.lineTo(p.x, p.y)
+    turf.beginPath()
+
+    if (path.length) {
+      path.forEach((p) => {
+        turf.lineTo(p.x, p.y)
       })
-
-      board.fill()
     } else {
-      board.fillRect(0, 0, w, h)
+      turf.rect(0, 0, w, h)
     }
 
-    return agent
+    turf.fill()
+
+    return jack
   }
 
-  agent.wipe = () => {
-    board.clearRect(0, 0, w, h)
+  jack.wipe = () => {
+    turf.clearRect(0, 0, w, h)
 
-    trail.length = 0
+    path.length = 0
 
-    return agent
+    return jack
   }
 
-  agent.home = () => agent.goto({ x: w * 0.5, y: h * 0.5 })
-  agent.goto = (point = store) => {
-    store.x = point.x
-    store.y = point.y
+  jack.home = () => jack.goto(home.x, home.y)
+  jack.goto = (x, y) => {
+    data.x = x || data.x
+    data.y = y || data.y
 
-    return agent
+    return jack
   }
 
-  agent.pu = agent.pd = () => {
-    store.state = !store.state
+  jack.down = jack.up = () => {
+    data.trace = !data.trace
 
-    return agent
+    return jack
   }
 
-  agent.lt = (target = 0) => {
-    store.angle += rad(target)
+  jack.turn = jack.lt = (angle) => {
+    data.angle += rad(angle)
 
-    return agent
+    return jack
   }
 
-  agent.fd = (target = 0) => {
-    const point = poltocar(store.angle, target)
-    const delta = { x: store.x + point.x, y: store.y - point.y }
+  jack.move = jack.fd = (reach) => {
+    const next = poltocar(data.angle, reach)
 
-    if (store.state) {
-      board.beginPath()
-      board.moveTo(store.x, store.y)
-      board.lineTo(delta.x, delta.y)
-      board.stroke()
+    const x = data.x + next.x
+    const y = data.y - next.y
 
-      trail.push(delta)
+    if (data.trace) {
+      turf.beginPath()
+      turf.moveTo(data.x, data.y)
+      turf.lineTo(x, y)
+      turf.stroke()
+
+      path.push({ x, y })
     }
 
-    return agent.goto(delta)
+    return jack.goto(x, y)
   }
 
-  agent.rt = v => agent.lt(-v)
-  agent.bk = v => agent.fd(-v)
+  jack.rt = v => jack.lt(-v)
+  jack.bk = v => jack.fd(-v)
 
-  return agent
+  return jack
 }
 
 export default createTurtle
