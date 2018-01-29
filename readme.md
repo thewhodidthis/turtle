@@ -1,4 +1,4 @@
-> Helps with procedural type drawing (WIP)
+> Helps with procedural type drawing
 
 ### Setup
 ```sh
