@@ -2,7 +2,7 @@
   "name": "@thewhodidthis/turtle",
   "version": "0.0.0",
   "description": "Graphics do",
-  "main": "index",
+  "main": "index.js",
   "module": "index.es",
   "homepage": "https://github.com/thewhodidthis/turtle#readme",
   "repository": {
