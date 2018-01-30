@@ -10,13 +10,6 @@ var deg = function (x) { return x * RAD; };
 
 var rad = function (x) { return x * DEG; };
 
-var rand = function (hi, lo) {
-  if ( hi === void 0 ) hi = 0;
-  if ( lo === void 0 ) lo = 0;
-
-  return Math.floor((Math.random() * (hi - lo))) + lo;
-};
-
 var poltocar = function (t, r) {
   if ( t === void 0 ) t = 0;
   if ( r === void 0 ) r = 1;
@@ -27,143 +20,133 @@ var poltocar = function (t, r) {
 });
 };
 
-var createTurtle = function (turf, load) {
-  if ( load === void 0 ) load = {};
-
-  var pass = turf instanceof CanvasRenderingContext2D;
+var createAgent = function (target) {
+  var pass = target instanceof CanvasRenderingContext2D;
 
   if (!pass) {
     throw Error('Invalid rendering context')
   }
 
-  var ref = turf.canvas;
-  var w = ref.width;
-  var h = ref.height;
-
-  var home = Object.assign({ x: w * 0.5, y: h * 0.5, angle: 0 }, load);
-  var data = Object.assign({ trace: 1 }, home);
-
-  var path = [];
-
-  // This turtle goes by the name of Jack :))
-  var jack = {
-    get venue() {
-      return { x: data.x, y: data.y }
-    },
-    get angle() {
-      return deg(data.angle)
-    },
-    get score() {
-      return path
-    },
-    get state() {
-      return data
+  var data = { x: 0, y: 0, angle: 0, trace: true };
+  var taxi = {
+    get data() {
+      return Object.assign({}, data, { angle: deg(data.angle) })
     }
   };
 
-  jack.look = function (style, width) {
-    if ( style === void 0 ) style = turf.strokeStyle;
-    if ( width === void 0 ) width = turf.lineWidth;
-
-    turf.strokeStyle = style;
-    turf.lineWidth = width;
-
-    return jack
-  };
-
-  jack.fill = function (style) {
+  taxi.look = function (style, width) {
     if (style) {
-      turf.fillStyle = style;
+      target.strokeStyle = style;
     }
 
-    turf.beginPath();
-
-    if (path.length) {
-      path.forEach(function (p) {
-        turf.lineTo(p.x, p.y);
-      });
-    } else {
-      turf.rect(0, 0, w, h);
+    if (width) {
+      target.lineWidth = width;
     }
 
-    turf.fill();
-
-    return jack
+    return taxi
   };
 
-  jack.wipe = function () {
-    turf.clearRect(0, 0, w, h);
-
-    path.length = 0;
-
-    return jack
-  };
-
-  jack.home = function () { return jack.goto(home.x, home.y); };
-  jack.goto = function (x, y) {
+  taxi.goto = function (x, y) {
     data.x = x || data.x;
     data.y = y || data.y;
 
-    return jack
+    return taxi
   };
 
-  jack.down = jack.up = function () {
-    data.trace = !data.trace;
+  taxi.mask = taxi.pu = function () {
+    data.trace = false;
 
-    return jack
+    return taxi
   };
 
-  jack.turn = jack.lt = function (angle) {
+  taxi.tail = taxi.pd = function () {
+    data.trace = true;
+
+    return taxi
+  };
+
+  taxi.turn = taxi.lt = function (angle) {
+    if ( angle === void 0 ) angle = 0;
+
     data.angle += rad(angle);
 
-    return jack
+    return taxi
   };
 
-  jack.move = jack.fd = function (reach) {
+  taxi.move = taxi.fd = function (reach) {
+    if ( reach === void 0 ) reach = 0;
+
     var next = poltocar(data.angle, reach);
 
     var x = data.x + next.x;
     var y = data.y - next.y;
 
     if (data.trace) {
-      turf.beginPath();
-      turf.moveTo(data.x, data.y);
-      turf.lineTo(x, y);
-      turf.stroke();
-
-      path.push({ x: x, y: y });
+      target.beginPath();
+      target.moveTo(data.x, data.y);
+      target.lineTo(x, y);
+      target.stroke();
     }
 
-    return jack.goto(x, y)
+    return taxi.goto(x, y)
   };
 
-  jack.rt = function (v) { return jack.lt(-v); };
-  jack.bk = function (v) { return jack.fd(-v); };
+  taxi.rt = function (v) { return taxi.lt(-v); };
+  taxi.bk = function (v) { return taxi.fd(-v); };
 
-  return jack
+  return taxi
 };
 
 var canvas = document.querySelector('canvas');
 var target = canvas.getContext('2d');
 
-var turtle = createTurtle(target);
-var stroll = function (n) {
-  if (n === 0) {
-    return
-  }
+var step = { x: canvas.width / 3, y: canvas.height / 2 };
+var cell = { x: step.x * 0.5, y: step.y * 0.5 };
 
-  var a = rand(90, -90);
-  var d = rand(4, 12);
+var taxi = createAgent(target).look('#fff', 1.5);
 
-  turtle.lt(a).fd(d);
+var repeat = function (draw) {
+  var loop = function (n) {
+    if (n === 0) {
+      return
+    }
 
-  stroll(n - 1);
+    draw(n);
+    loop(n - 1);
+  };
+
+  return loop
 };
 
-['#fff', '#f00', '#0ff', '#00f', '#f0f', '#ff0'].forEach(function (c) {
-  turtle.home().look(c);
+var sketch = function (sides, R, t) {
+  var angle = 360 / sides;
+  var reach = 2 * R * Math.sin(Math.PI / sides);
 
-  stroll(360);
+  return function () {
+    for (var i = 0; i < sides; i += 1) {
+      taxi.turn(angle).move(reach);
+    }
+
+    taxi.turn(t);
+  }
+};
+
+var size = 35;
+var grid = function (v, i) { return ({ x: i % 3, y: Math.floor(i / 3) }); };
+
+Array.from({ length: 3 * 2 }).map(grid).forEach(function (v, i) {
+  var x = (v.x * step.x) + cell.x;
+  var y = (v.y * step.y) + cell.y;
+
+  var n = Math.min(i + 5, 9);
+  var k = i % 2 ? 18 : 10;
+
+  taxi.goto(x, y);
+
+  var form = sketch(n, size, 360 / k);
+  var loop = repeat(form);
+
+  loop(k);
 });
 
 }());
