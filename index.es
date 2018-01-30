@@ -1,116 +1,80 @@
 import { deg, rad } from '@thewhodidthis/arithmetics'
 import poltocar from 'poltocar'
 
-// # Turtle
-// Graphics do
+// # Taxi
+// Teeny tiny turtle graphics helper
 
-const createTurtle = (turf, load = {}) => {
-  const pass = turf instanceof CanvasRenderingContext2D
+const createAgent = (target) => {
+  const pass = target instanceof CanvasRenderingContext2D
 
   if (!pass) {
     throw Error('Invalid rendering context')
   }
 
-  const { width: w, height: h } = turf.canvas
-
-  const home = Object.assign({ x: w * 0.5, y: h * 0.5, angle: 0 }, load)
-  const data = Object.assign({ trace: 1 }, home)
-
-  const path = []
-
-  // This turtle goes by the name of Jack :))
-  const jack = {
-    get venue() {
-      return { x: data.x, y: data.y }
-    },
-    get angle() {
-      return deg(data.angle)
-    },
-    get score() {
-      return path
-    },
-    get state() {
-      return data
+  const data = { x: 0, y: 0, angle: 0, trace: true }
+  const taxi = {
+    get data() {
+      return Object.assign({}, data, { angle: deg(data.angle) })
     }
   }
 
-  jack.look = (style = turf.strokeStyle, width = turf.lineWidth) => {
-    turf.strokeStyle = style
-    turf.lineWidth = width
-
-    return jack
-  }
-
-  jack.fill = (style) => {
+  taxi.look = (style, width) => {
     if (style) {
-      turf.fillStyle = style
+      target.strokeStyle = style
     }
 
-    turf.beginPath()
-
-    if (path.length) {
-      path.forEach((p) => {
-        turf.lineTo(p.x, p.y)
-      })
-    } else {
-      turf.rect(0, 0, w, h)
+    if (width) {
+      target.lineWidth = width
     }
 
-    turf.fill()
-
-    return jack
+    return taxi
   }
 
-  jack.wipe = () => {
-    turf.clearRect(0, 0, w, h)
-
-    path.length = 0
-
-    return jack
-  }
-
-  jack.home = () => jack.goto(home.x, home.y)
-  jack.goto = (x, y) => {
+  taxi.goto = (x, y) => {
     data.x = x || data.x
     data.y = y || data.y
 
-    return jack
+    return taxi
   }
 
-  jack.down = jack.up = () => {
-    data.trace = !data.trace
+  taxi.mask = taxi.pu = () => {
+    data.trace = false
 
-    return jack
+    return taxi
   }
 
-  jack.turn = jack.lt = (angle) => {
+  taxi.tail = taxi.pd = () => {
+    data.trace = true
+
+    return taxi
+  }
+
+  taxi.turn = taxi.lt = (angle = 0) => {
     data.angle += rad(angle)
 
-    return jack
+    return taxi
   }
 
-  jack.move = jack.fd = (reach) => {
+  taxi.move = taxi.fd = (reach = 0) => {
     const next = poltocar(data.angle, reach)
 
     const x = data.x + next.x
     const y = data.y - next.y
 
     if (data.trace) {
-      turf.beginPath()
-      turf.moveTo(data.x, data.y)
-      turf.lineTo(x, y)
-      turf.stroke()
-
-      path.push({ x, y })
+      target.beginPath()
+      target.moveTo(data.x, data.y)
+      target.lineTo(x, y)
+      target.stroke()
     }
 
-    return jack.goto(x, y)
+    return taxi.goto(x, y)
   }
 
-  jack.rt = v => jack.lt(-v)
-  jack.bk = v => jack.fd(-v)
+  taxi.rt = v => taxi.lt(-v)
+  taxi.bk = v => taxi.fd(-v)
 
-  return jack
+  return taxi
 }
 
-export default createTurtle
+export default createAgent
