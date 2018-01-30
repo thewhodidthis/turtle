@@ -18,14 +18,14 @@ const createAgent = (target) => {
     }
   }
 
-  taxi.look = (style, width) => {
-    if (style) {
-      target.strokeStyle = style
-    }
+  taxi.skin = (s) => {
+    target.strokeStyle = s
 
-    if (width) {
-      target.lineWidth = width
-    }
+    return taxi
+  }
+
+  taxi.mass = (n) => {
+    target.lineWidth = n
 
     return taxi
   }

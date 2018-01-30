@@ -20,14 +20,14 @@ var createAgent = function (target) {
     }
   };
 
-  taxi.look = function (style, width) {
-    if (style) {
-      target.strokeStyle = style;
-    }
+  taxi.skin = function (s) {
+    target.strokeStyle = s;
 
-    if (width) {
-      target.lineWidth = width;
-    }
+    return taxi
+  };
+
+  taxi.mass = function (n) {
+    target.lineWidth = n;
 
     return taxi
   };
