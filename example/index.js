@@ -20,7 +20,7 @@ var poltocar = function (t, r) {
 });
 };
 
-var createAgent = function (target) {
+var createTaxi = function (target) {
   var pass = target instanceof CanvasRenderingContext2D;
 
   if (!pass) {
@@ -35,17 +35,13 @@ var createAgent = function (target) {
   };
 
   taxi.skin = function (s) {
-    if (s) {
-      target.strokeStyle = s;
-    }
+    target.strokeStyle = s;
 
     return taxi
   };
 
   taxi.mass = function (n) {
-    if (n) {
-      target.lineWidth = parseFloat(n);
-    }
+    target.lineWidth = n;
 
     return taxi
   };
@@ -107,7 +103,7 @@ var target = canvas.getContext('2d');
 var step = { x: canvas.width / 3, y: canvas.height / 2 };
 var cell = { x: step.x * 0.5, y: step.y * 0.5 };
 
-var taxi = createAgent(target).skin('white').mass(1.5);
+var taxi = createTaxi(target).skin('white').mass(1.5);
 
 var repeat = function (draw) {
   var loop = function (n) {
