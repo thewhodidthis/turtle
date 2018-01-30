@@ -19,7 +19,7 @@ const half = size * 0.5
 // Initialize
 const taxi = turtle(target)
     // Pen color
-    .look('white')
+    .skin('red')
     // Move to canvas mid
     .goto(canvas.width * 0.5, canvas.height * 0.5)
     // Pen up
