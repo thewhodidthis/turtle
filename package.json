@@ -1,16 +1,16 @@
 {
-  "name": "@thewhodidthis/turtle",
+  "name": "@thewhodidthis/taxi",
   "version": "0.0.0",
-  "description": "Graphics do",
+  "description": "Helps with turtle graphics",
   "main": "index.js",
   "module": "index.es",
-  "homepage": "https://github.com/thewhodidthis/turtle#readme",
+  "homepage": "https://github.com/thewhodidthis/taxi#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thewhodidthis/turtle.git"
+    "url": "git+https://github.com/thewhodidthis/taxi.git"
   },
   "bugs": {
-    "url": "https://github.com/thewhodidthis/turtle/issues"
+    "url": "https://github.com/thewhodidthis/taxi/issues"
   },
   "scripts": {
     "pretest": "eslint test.js",
