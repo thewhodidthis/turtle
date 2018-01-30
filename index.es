@@ -4,7 +4,7 @@ import poltocar from 'poltocar'
 // # Taxi
 // Teeny tiny turtle graphics helper
 
-const createAgent = (target) => {
+const createTaxi = (target) => {
   const pass = target instanceof CanvasRenderingContext2D
 
   if (!pass) {
@@ -77,4 +77,4 @@ const createAgent = (target) => {
   return taxi
 }
 
-export default createAgent
+export default createTaxi

@@ -6,7 +6,7 @@ var poltocar = require('poltocar');
 // # Taxi
 // Teeny tiny turtle graphics helper
 
-var createAgent = function (target) {
+var createTaxi = function (target) {
   var pass = target instanceof CanvasRenderingContext2D;
 
   if (!pass) {
@@ -83,5 +83,5 @@ var createAgent = function (target) {
   return taxi
 };
 
-module.exports = createAgent;
+module.exports = createTaxi;
 
