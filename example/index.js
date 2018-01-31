@@ -40,7 +40,7 @@ var createTaxi = function (target) {
     return taxi
   };
 
-  taxi.mass = function (n) {
+  taxi.hint = function (n) {
     target.lineWidth = n;
 
     return taxi
@@ -103,7 +103,7 @@ var target = canvas.getContext('2d');
 var step = { x: canvas.width / 3, y: canvas.height / 2 };
 var cell = { x: step.x * 0.5, y: step.y * 0.5 };
 
-var taxi = createTaxi(target).skin('white').mass(1.5);
+var taxi = createTaxi(target).skin('#888').hint(1.5);
 
 var repeat = function (draw) {
   var loop = function (n) {

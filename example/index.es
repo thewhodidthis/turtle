@@ -6,7 +6,7 @@ const target = canvas.getContext('2d')
 const step = { x: canvas.width / 3, y: canvas.height / 2 }
 const cell = { x: step.x * 0.5, y: step.y * 0.5 }
 
-const taxi = turtle(target).skin('white').mass(1.5)
+const taxi = turtle(target).skin('#888').hint(1.5)
 
 const repeat = (draw) => {
   const loop = (n) => {
