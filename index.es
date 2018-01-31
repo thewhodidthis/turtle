@@ -1,5 +1,5 @@
 import { deg, rad } from '@thewhodidthis/arithmetics'
-import poltocar from 'poltocar'
+import pol2car from 'poltocar'
 
 // # Taxi
 // Teeny tiny turtle graphics helper
@@ -49,14 +49,14 @@ const createTaxi = (target) => {
     return taxi
   }
 
-  taxi.turn = taxi.lt = (angle = 0) => {
-    data.angle += rad(angle)
+  taxi.turn = taxi.lt = (a = 0) => {
+    data.angle += rad(a)
 
     return taxi
   }
 
-  taxi.move = taxi.fd = (reach = 0) => {
-    const next = poltocar(data.angle, reach)
+  taxi.move = taxi.fd = (r, more = v => v) => {
+    const next = pol2car(data.angle, r || 0)
 
     const x = data.x + next.x
     const y = data.y - next.y
@@ -67,6 +67,8 @@ const createTaxi = (target) => {
       target.lineTo(x, y)
       target.stroke()
     }
+
+    more({ x, y })
 
     return taxi.goto(x, y)
   }
