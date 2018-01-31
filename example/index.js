@@ -65,18 +65,18 @@ var createTaxi = function (target) {
     return taxi
   };
 
-  taxi.turn = taxi.lt = function (angle) {
-    if ( angle === void 0 ) angle = 0;
+  taxi.turn = taxi.lt = function (a) {
+    if ( a === void 0 ) a = 0;
 
-    data.angle += rad(angle);
+    data.angle += rad(a);
 
     return taxi
   };
 
-  taxi.move = taxi.fd = function (reach) {
-    if ( reach === void 0 ) reach = 0;
+  taxi.move = taxi.fd = function (r, more) {
+    if ( more === void 0 ) more = function (v) { return v; };
 
-    var next = poltocar(data.angle, reach);
+    var next = poltocar(data.angle, r || 0);
 
     var x = data.x + next.x;
     var y = data.y - next.y;
@@ -87,6 +87,8 @@ var createTaxi = function (target) {
       target.lineTo(x, y);
       target.stroke();
     }
+
+    more({ x: x, y: y });
 
     return taxi.goto(x, y)
   };
