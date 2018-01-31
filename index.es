@@ -24,7 +24,7 @@ const createTaxi = (target) => {
     return taxi
   }
 
-  taxi.mass = (n) => {
+  taxi.hint = (n) => {
     target.lineWidth = n
 
     return taxi

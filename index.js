@@ -26,7 +26,7 @@ var createTaxi = function (target) {
     return taxi
   };
 
-  taxi.mass = function (n) {
+  taxi.hint = function (n) {
     target.lineWidth = n;
 
     return taxi
