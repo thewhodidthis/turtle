@@ -8,7 +8,7 @@ npm i thewhodidthis/taxi
 
 ### Usage
 ```js
-import turtle form '@thewhodidthis/taxi'
+import createTaxi form '@thewhodidthis/taxi'
 
 const canvas = document.createElement('canvas')
 const target = canvas.getContext('2d')
@@ -16,8 +16,24 @@ const target = canvas.getContext('2d')
 const size = 99
 const half = size * 0.5
 
-// Initialize
-const taxi = turtle(target)
+const jack = createTaxi(target)
+
+// Mix in a couple of helper methods for the sake of it
+const jill = Object.assign({
+  skin(s) {
+    target.strokeStyle = s
+
+    return this
+  },
+  hint(n) {
+    target.lineWidth = n
+
+    return this
+  }
+}, jack)
+
+// Prepare
+jill
     // Pen color
     .skin('red')
     // Move to canvas mid
@@ -33,16 +49,16 @@ const taxi = turtle(target)
     // Pen down
     .pd()
 
-const draw = (n) => {
+const tick = (n) => {
     if (n === 0) {
         return
     }
 
     taxi.move(size).turn(90)
 
-    draw(n - 1)
+    tick(n - 1)
 }
 
 // Be square
-draw(4)
+tick(4)
 ``
