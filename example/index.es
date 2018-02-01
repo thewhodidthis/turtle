@@ -1,12 +1,15 @@
-import turtle from '../index.es'
+import createTaxi from '../index.mjs'
 
 const canvas = document.querySelector('canvas')
 const target = canvas.getContext('2d')
 
+target.lineWidth = 1.5
+target.strokeStyle = '#888'
+
 const step = { x: canvas.width / 3, y: canvas.height / 2 }
 const cell = { x: step.x * 0.5, y: step.y * 0.5 }
 
-const taxi = turtle(target).skin('#888').hint(1.5)
+const taxi = createTaxi(target)
 
 const repeat = (draw) => {
   const loop = (n) => {
