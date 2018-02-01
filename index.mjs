@@ -2,13 +2,18 @@ import { deg, rad } from '@thewhodidthis/arithmetics'
 import pol2car from 'poltocar'
 
 // # Taxi
-// Teeny tiny turtle graphics helper
+// Teeny tiny turtle graphics agent
 
-const createTaxi = (target) => {
-  const pass = target instanceof CanvasRenderingContext2D
-
-  if (!pass) {
+const createTaxi = (target = {}, handler) => {
+  if (!('canvas' in target)) {
     throw Error('Invalid rendering context')
+  }
+
+  const draw = typeof handler === 'function' ? handler : (sx, sy, dx, dy) => {
+    target.beginPath()
+    target.moveTo(sx, sy)
+    target.lineTo(dx, dy)
+    target.stroke()
   }
 
   const data = { x: 0, y: 0, angle: 0, trace: true }
@@ -18,21 +23,9 @@ const createTaxi = (target) => {
     }
   }
 
-  taxi.skin = (s) => {
-    target.strokeStyle = s
-
-    return taxi
-  }
-
-  taxi.hint = (n) => {
-    target.lineWidth = n
-
-    return taxi
-  }
-
-  taxi.goto = (x, y) => {
-    data.x = x || data.x
-    data.y = y || data.y
+  taxi.goto = (x = data.x, y = data.y) => {
+    data.x = x
+    data.y = y
 
     return taxi
   }
@@ -55,20 +48,15 @@ const createTaxi = (target) => {
     return taxi
   }
 
-  taxi.move = taxi.fd = (r, more = v => v) => {
-    const next = pol2car(data.angle, r || 0)
+  taxi.move = taxi.fd = (r) => {
+    const step = pol2car(data.angle, r || 0)
 
-    const x = data.x + next.x
-    const y = data.y - next.y
+    const x = data.x + step.x
+    const y = data.y - step.y
 
     if (data.trace) {
-      target.beginPath()
-      target.moveTo(data.x, data.y)
-      target.lineTo(x, y)
-      target.stroke()
+      draw(data.x, data.y, x, y)
     }
-
-    more({ x, y })
 
     return taxi.goto(x, y)
   }
