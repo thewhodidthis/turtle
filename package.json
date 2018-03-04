@@ -16,16 +16,16 @@
     "pretest": "eslint test.js",
     "test": "rollup -c node:x -f iife test.js | kpow",
     "prestart": "eslint index.mjs",
-    "start": "rollup -e @thewhodidthis/arithmetics,poltocar -f cjs --no-interop index.mjs | buble > index.js",
-    "preexample": "eslint example/index.es",
-    "example": "cd example; rollup -c node:x -f iife index.es | buble | cpp -P | grep -v '^//' | uniq > index.js"
+    "start": "rollup -e @thewhodidthis/arithmetics,poltocar -f cjs --no-interop index.mjs > index.js",
+    "preexample": "eslint example/index.js",
+    "example": "cd example; rollup -c node:x -f iife index.js | cpp -P | grep -v '^//' | uniq > bundle.js"
   },
   "eslintConfig": {
     "extends": "@thewhodidthis"
   },
   "engines": {
-    "node": ">=6.4.0",
-    "npm": ">=3.10.3"
+    "node": ">=6.11.0",
+    "npm": ">=3.10.10"
   },
   "dependencies": {
     "@thewhodidthis/arithmetics": "github:thewhodidthis/arithmetics",
@@ -33,9 +33,9 @@
   },
   "devDependencies": {
     "@thewhodidthis/eslint-config": "latest",
-    "buble": "latest",
     "cutaway": "latest",
     "eslint": "latest",
+    "kpow": "latest",
     "rollup": "latest",
     "rollup-config-x": "latest",
     "tapeless": "latest"
