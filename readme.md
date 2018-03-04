@@ -20,16 +20,16 @@ const jack = createTaxi(target)
 
 // Mix in a couple of helper methods for the sake of it
 const jill = Object.assign({
-  skin(s) {
-    target.strokeStyle = s
+    skin(s) {
+        target.strokeStyle = s
 
-    return this
-  },
-  hint(n) {
-    target.lineWidth = n
+        return this
+    },
+    hint(n) {
+        target.lineWidth = n
 
-    return this
-  }
+        return this
+    }
 }, jack)
 
 // Prepare
