@@ -1,6 +1,6 @@
 {
   "name": "@thewhodidthis/taxi",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Helps with turtle graphics",
   "main": "index",
   "module": "index.mjs",
