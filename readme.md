@@ -61,4 +61,4 @@ const tick = (n) => {
 
 // Be square
 tick(4)
-``
+```
