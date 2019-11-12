@@ -7,8 +7,11 @@ const { ok } = assert
 try {
   createTaxi()
 } catch (e) {
-  ok(e instanceof Error, 'error', 'will throw sans context')
-  ok(e.message === 'Invalid rendering context', 'error message is a match')
+  ok
+    .describe('will throw sans context')
+    .test(e instanceof Error, 'error')
+    .describe('error message is a match')
+    .test(e.message === 'Invalid rendering context')
 }
 
 report()
