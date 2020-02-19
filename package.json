@@ -16,9 +16,9 @@
     "pretest": "eslint test.js",
     "test": "rollup -c node:x -f iife test.js | kpow",
     "prestart": "eslint index.mjs",
-    "start": "rollup -e @thewhodidthis/arithmetics,poltocar -f cjs --no-interop index.mjs > index.js",
+    "start": "rollup -e @thewhodidthis/arithmetics,poltocar -f cjs index.mjs --no-interop > index.js",
     "preexample": "eslint example/index.js",
-    "example": "cd example; rollup -c node:x -f iife index.js | cpp -P | grep -v '^//' | uniq > bundle.js"
+    "example": "cd example; rollup -c node:x -f iife index.js > bundle.js"
   },
   "eslintConfig": {
     "extends": "@thewhodidthis"
@@ -28,17 +28,17 @@
     "npm": ">=3.10.10"
   },
   "dependencies": {
-    "@thewhodidthis/arithmetics": "github:thewhodidthis/arithmetics",
-    "poltocar": "github:thewhodidthis/poltocar"
+    "@thewhodidthis/arithmetics": "^0.0.5",
+    "poltocar": "^2.0.5"
   },
   "devDependencies": {
-    "@thewhodidthis/eslint-config": "latest",
-    "cutaway": "latest",
-    "eslint": "latest",
-    "kpow": "latest",
-    "rollup": "latest",
-    "rollup-config-x": "latest",
-    "tapeless": "latest"
+    "@thewhodidthis/eslint-config": "^0.0.16",
+    "cutaway": "^0.0.7",
+    "eslint": "^6.8.0",
+    "kpow": "^0.1.4",
+    "rollup": "^1.31.1",
+    "rollup-config-x": "^1.0.4",
+    "tapeless": "^0.0.9"
   },
   "keywords": [
     "canvas",
