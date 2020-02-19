@@ -1,6 +1,7 @@
 {
   "name": "@thewhodidthis/taxi",
   "version": "0.0.2",
+  "private": true,
   "description": "Helps with turtle graphics",
   "keywords": [
     "canvas",
