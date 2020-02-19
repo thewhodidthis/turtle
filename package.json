@@ -2,30 +2,32 @@
   "name": "@thewhodidthis/taxi",
   "version": "0.0.1",
   "description": "Helps with turtle graphics",
-  "main": "index",
-  "module": "index.mjs",
+  "keywords": [
+    "canvas",
+    "graphics"
+  ],
   "homepage": "https://github.com/thewhodidthis/taxi#readme",
+  "bugs": {
+    "url": "https://github.com/thewhodidthis/taxi/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thewhodidthis/taxi.git"
   },
-  "bugs": {
-    "url": "https://github.com/thewhodidthis/taxi/issues"
-  },
+  "license": "Unlicense",
+  "author": "sChzs BkgNns <sotirios.bakagiannis@gmail.com> (https://www.thewhodidthis.com)",
+  "main": "index",
+  "module": "index.mjs",
   "scripts": {
-    "pretest": "eslint test.js",
-    "test": "rollup -c node:x -f iife test.js | kpow",
+    "preexample": "eslint example/index.js",
+    "example": "cd example; rollup -c node:x -f iife index.js > bundle.js",
     "prestart": "eslint index.mjs",
     "start": "rollup -e @thewhodidthis/arithmetics,poltocar -f cjs index.mjs --no-interop > index.js",
-    "preexample": "eslint example/index.js",
-    "example": "cd example; rollup -c node:x -f iife index.js > bundle.js"
+    "pretest": "eslint test.js",
+    "test": "rollup -c node:x -f iife test.js | kpow"
   },
   "eslintConfig": {
     "extends": "@thewhodidthis"
-  },
-  "engines": {
-    "node": ">=6.11.0",
-    "npm": ">=3.10.10"
   },
   "dependencies": {
     "@thewhodidthis/arithmetics": "^0.0.5",
@@ -40,10 +42,8 @@
     "rollup-config-x": "^1.0.4",
     "tapeless": "^0.0.9"
   },
-  "keywords": [
-    "canvas",
-    "graphics"
-  ],
-  "author": "sChzs BkgNns <sotirios.bakagiannis@gmail.com> (https://www.thewhodidthis.com)",
-  "license": "Unlicense"
+  "engines": {
+    "node": ">=6.11.0",
+    "npm": ">=3.10.10"
+  }
 }
