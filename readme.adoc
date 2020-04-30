@@ -21,7 +21,7 @@ const jack = createTaxi(target)
 // Mix in a couple of helper methods for the sake of it
 const jill = Object.assign({
   skin(s) {
-    target.strokeStyle = s
+    target.strokeStyle = sl
 
     return this
   },
@@ -34,19 +34,19 @@ const jill = Object.assign({
 
 // Prepare
 jill
-// Pen color
+  // Pen color
   .skin('red')
-// Move to canvas mid
+  // Move to canvas mid
   .goto(canvas.width * 0.5, canvas.height * 0.5)
-// Pen up
+  // Pen up
   .pu()
-// Go back a bit
+  // Go back a bit
   .bk(half)
-// Turn right
+  // Turn right
   .rt(90)
-// Go back again
+  // Go back again
   .bk(half)
-// Pen down
+  // Pen down
   .pd()
 
 const tick = (n) => {
