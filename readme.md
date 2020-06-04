@@ -1,6 +1,6 @@
 ## about
 
-Teeny tiny [turtle graphics](https://docs.python.org/3.3/library/turtle.htm) module.
+Teeny tiny [turtle](https://docs.python.org/3.3/library/turtle.htm) brains.
 
 ## setup
 
