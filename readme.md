@@ -1,12 +1,19 @@
-> Teeny tiny turtle thing
+## about
 
-### Setup
+Teeny tiny [turtle graphics](https://docs.python.org/3.3/library/turtle.htm) module.
+
+## setup
+
+Fetch latest from GitHub directly:
+
 ```sh
-# Fetch latest from github
-npm i thewhodidthis/taxi
+npm install thewhodidthis/taxi
 ```
 
-### Usage
+## usage
+
+Initialize with a [`CanvasRenderingContext2D`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) to then be drawing on. For example,
+
 ```js
 import createTaxi from '@thewhodidthis/taxi'
 
