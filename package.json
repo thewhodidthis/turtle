@@ -43,7 +43,7 @@
     "eslint": "^7.2.0",
     "kpow": "^0.1.8",
     "rollup": "^2.17.0",
-    "rollup-config-x": "^2.0.2",
+    "rollup-config-x": "^2.0.3",
     "tapeless": "^0.0.11"
   },
   "engines": {
