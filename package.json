@@ -38,13 +38,13 @@
     "poltocar": "^2.0.6"
   },
   "devDependencies": {
-    "@thewhodidthis/eslint-config": "^0.0.18",
-    "cutaway": "^0.0.8",
-    "eslint": "^6.8.0",
-    "kpow": "^0.1.5",
-    "rollup": "^1.31.1",
-    "rollup-config-x": "^1.0.5",
-    "tapeless": "^0.0.10"
+    "@thewhodidthis/eslint-config": "^0.1.6",
+    "cutaway": "^0.0.11",
+    "eslint": "^7.2.0",
+    "kpow": "^0.1.8",
+    "rollup": "^2.17.0",
+    "rollup-config-x": "^2.0.2",
+    "tapeless": "^0.0.11"
   },
   "engines": {
     "node": ">=6.11.0",
