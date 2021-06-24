@@ -1,15 +1,15 @@
-import { deg, rad } from '@thewhodidthis/arithmetics'
-import pol2car from 'poltocar'
+import { deg, rad } from "@thewhodidthis/arithmetics"
+import pol2car from "poltocar"
 
 // # Taxi
 // Teeny tiny turtle graphics agent
 
 const createTaxi = (target = {}, handler) => {
-  if (!('canvas' in target)) {
-    throw Error('Invalid rendering context')
+  if (!("canvas" in target)) {
+    throw Error("Invalid rendering context")
   }
 
-  const draw = typeof handler === 'function' ? handler : (sx, sy, dx, dy) => {
+  const draw = typeof handler === "function" ? handler : (sx, sy, dx, dy) => {
     target.beginPath()
     target.moveTo(sx, sy)
     target.lineTo(dx, dy)
@@ -20,7 +20,7 @@ const createTaxi = (target = {}, handler) => {
   const taxi = {
     get data() {
       return Object.assign({}, data, { angle: deg(data.angle) })
-    }
+    },
   }
 
   taxi.goto = (x = data.x, y = data.y) => {
