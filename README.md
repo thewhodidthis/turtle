@@ -15,10 +15,10 @@ npm install thewhodidthis/taxi
 Initialize with a [`CanvasRenderingContext2D`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) to then be drawing on. For example,
 
 ```js
-import createTaxi from '@thewhodidthis/taxi'
+import createTaxi from "@thewhodidthis/taxi"
 
-const canvas = document.createElement('canvas')
-const target = canvas.getContext('2d')
+const canvas = document.createElement("canvas")
+const target = canvas.getContext("2d")
 
 const size = 99
 const half = size * 0.5
@@ -36,13 +36,13 @@ const jill = Object.assign({
     target.lineWidth = n
 
     return this
-  }
+  },
 }, jack)
 
 // Prepare
 jill
   // Pen color
-  .skin('red')
+  .skin("red")
   // Move to canvas mid
   .goto(canvas.width * 0.5, canvas.height * 0.5)
   // Pen up
