@@ -28,14 +28,14 @@
     "test": "esbuild --bundle test.js | kpow"
   },
   "dependencies": {
-    "@thewhodidthis/arithmetics": "^0.0.7",
-    "poltocar": "^2.0.7"
+    "@thewhodidthis/arithmetics": "^1.0.0",
+    "poltocar": "^3.0.1"
   },
   "devDependencies": {
     "cutaway": "^1.0.9",
-    "esbuild": "^0.12.9",
-    "kpow": "^3.0.0",
-    "tapeless": "^1.0.5"
+    "esbuild": "^0.12.12",
+    "kpow": "^3.0.1",
+    "tapeless": "^2.0.1"
   },
   "engines": {
     "node": ">=14.17.0",

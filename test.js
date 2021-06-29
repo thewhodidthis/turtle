@@ -1,5 +1,5 @@
 import "cutaway"
-import { assert, report } from "tapeless/browser"
+import { assert, report } from "tapeless"
 import createTaxi from "./main.js"
 
 const { ok } = assert

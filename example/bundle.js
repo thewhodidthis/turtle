@@ -1,17 +1,17 @@
 (() => {
-  // ../node_modules/.pnpm/@thewhodidthis+arithmetics@0.0.7/node_modules/@thewhodidthis/arithmetics/index.mjs
+  // ../node_modules/.pnpm/@thewhodidthis+arithmetics@1.0.0/node_modules/@thewhodidthis/arithmetics/main.js
   var TAU = 2 * Math.PI;
   var RAD = 360 / TAU;
   var DEG = TAU / 360;
   var deg = (x) => x * RAD;
   var rad = (x) => x * DEG;
 
-  // ../node_modules/.pnpm/poltocar@2.0.7/node_modules/poltocar/index.mjs
+  // ../node_modules/.pnpm/poltocar@3.0.1/node_modules/poltocar/main.js
   var poltocar = (a = 0, r = 1) => ({
     x: r * Math.cos(a),
     y: r * Math.sin(a)
   });
-  var poltocar_default = poltocar;
+  var main_default = poltocar;
 
   // ../main.js
   var createTaxi = (target2 = {}, handler) => {
@@ -48,7 +48,7 @@
       return taxi2;
     };
     taxi2.move = taxi2.fd = (r) => {
-      const step2 = poltocar_default(data.angle, r || 0);
+      const step2 = main_default(data.angle, r || 0);
       const x = data.x + step2.x;
       const y = data.y - step2.y;
       if (data.trace) {
@@ -60,7 +60,7 @@
     taxi2.bk = (v) => taxi2.fd(-v);
     return taxi2;
   };
-  var main_default = createTaxi;
+  var main_default2 = createTaxi;
 
   // index.js
   var canvas = document.querySelector("canvas");
@@ -69,7 +69,7 @@
   target.strokeStyle = "#888";
   var step = { x: canvas.width / 3, y: canvas.height / 2 };
   var cell = { x: step.x * 0.5, y: step.y * 0.5 };
-  var taxi = main_default(target);
+  var taxi = main_default2(target);
   var repeat = (draw) => {
     const loop = (n) => {
       if (n === 0) {
