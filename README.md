@@ -4,7 +4,7 @@ Teeny tiny [turtle](https://docs.python.org/3.3/library/turtle.htm) brains.
 
 ## setup
 
-Fetch latest from GitHub directly:
+Download from GitHub directly:
 
 ```sh
 npm install thewhodidthis/taxi
